@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.debug.pmp.model.mapper.SysUserMapper">
+
+    <select id="selectByUsername" resultType="com.debug.pmp.model.entity.SysUser">
+        select * from sys_user where username=#{username}
+    </select>
+    <select id="selectRoleDeptIdsByUserId" resultType="java.lang.Long">
+        SELECT
+            rd.dept_id
+        FROM
+            sys_role_dept rd
+            LEFT JOIN sys_user_role ur ON rd.role_id = ur.role_id
+        WHERE
+            ur.user_id = #{userId}
+    </select>
+</mapper>

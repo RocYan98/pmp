@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.debug.pmp.model.mapper.SysDeptMapper">
+
+    <select id="selectAll" resultType="com.debug.pmp.model.entity.SysDept">
+        select
+            *,
+            (select
+                name
+            from sys_dept d2
+            where d1.parent_id = d2.dept_id ) parent_name
+        from sys_dept d1
+        where d1.del_flag = 0
+
+        <if test="deptIdList != null and deptIdList != ''">
+            and dept_id in (${deptIdList})
+        </if>
+    </select>
+</mapper>
